@@ -32,6 +32,7 @@ namespace INIManager
         #region Private variables
         private CultureInfo culture = CultureInfo.InvariantCulture;
         private string eol = "\r\n";
+        private char commentTag = ';';
         private List<string[]> configData = new List<string[]>();
         private Regex rHeader = new Regex(@"(?<=^\[)[a-zA-Z0-9_\-]+(?=\]$)");
         private Regex rVariable = new Regex(@"(?<=^)[a-zA-Z0-9_\-]+(?=$)");
@@ -109,7 +110,7 @@ namespace INIManager
                             break;
 
                         linenr++;
-                        line += configLines[linenr].Split(';')[0].Trim();
+                        line += configLines[linenr].Split(commentTag)[0].Trim();
                     }
                     string[] kv = line.Split(new char[] { '=' }, 2);
 
@@ -136,6 +137,19 @@ namespace INIManager
         /// <returns>Config in a string form</returns>
         public string SaveConfig()
         {
+            return SaveConfig(null);
+        }
+
+        /// <summary>
+        /// Saves the config
+        /// Comments are added in front of the headers <Header, Comment>
+        /// </summary>
+        /// <returns>Config in a string form</returns>
+        public string SaveConfig(KeyValuePair<string, string>[] comments)
+        {
+            if (comments == null)
+                comments = new KeyValuePair<string, string>[0];            
+
             configData.Sort(delegate(string[] s1, string[] s2) { return string.Compare(s1[0], s2[0]); });
 
             string config = "";
@@ -145,7 +159,19 @@ namespace INIManager
                 if (variable[0] != currentHeader)
                 {
                     currentHeader = variable[0];
-                    config += eol + eol + "[" + currentHeader + "]";
+                    config += eol;
+
+                    foreach (KeyValuePair<string, string> comment in comments) {
+                        if((CaseSensitive ? comment.Key : comment.Key.ToLower()) ==
+                            (CaseSensitive ? currentHeader : currentHeader.ToLower())) {
+                                config += eol + commentTag + comment.Value.Replace("\r", "").Replace("\n", eol + commentTag);
+                        }
+                    }
+                    
+                    variable[2] = variable[2].Replace("\r\n", "\n").Replace('\r', '\n')
+                    variable[2] = variable[2].Replace("\n", "\\" + eol);
+
+                    config += eol + "[" + currentHeader + "]";
                 }
                 config += eol + variable[1] + "=" + variable[2];
             }
