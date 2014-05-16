@@ -44,7 +44,7 @@ class Program
         Console.WriteLine("food, cake = " + config2.GetString("food", "cake"));
         Console.WriteLine("food, strawbery = " + config2.GetString("food", "strawbery"));
         Console.WriteLine("food, pie = " + config2.GetString("food", "pie"));
-        Console.WriteLine("food, penuts = " + config2.GetString("food", "penuts")); //should be empty!
+        Console.WriteLine("food, penuts = " + config2.GetString("food", "penuts", "Oh noes a backup value!")); //should be empty!
 
         Console.WriteLine("generic, string = " + config2.GetString("generic", "string"));
         Console.WriteLine("generic, int = {0}", config2.GetInt("generic", "int"));
