@@ -33,8 +33,8 @@ namespace INIManager
         private CultureInfo culture = CultureInfo.InvariantCulture;
         private string eol = "\r\n";
         private List<string[]> configData = new List<string[]>();
-        private Regex rHeader = new Regex(@"(?<=^\[)[a-zA-Z0-9]{1,}(?=\]$)");
-        private Regex rVariable = new Regex(@"(?<=^)[a-zA-Z0-9]{1,}(?=$)");
+        private Regex rHeader = new Regex(@"(?<=^\[)[a-zA-Z0-9_\-]+(?=\]$)");
+        private Regex rVariable = new Regex(@"(?<=^)[a-zA-Z0-9_\-]+(?=$)");
         #endregion
 
         /// <summary>
