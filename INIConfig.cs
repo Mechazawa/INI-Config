@@ -389,8 +389,7 @@ namespace INIManager
                     return;
                 }
             }
-
-            //			Debug.Log (header + " " + variable + " " + value);
+            
             configData.Add(new string[] { header, variable, value });
         }
 
@@ -413,7 +412,7 @@ namespace INIManager
         /// <param name="value">The value you want to set the variable to</param>
         public void SetVariable(string header, string variable, char value)
         {
-            SetVariable(header, variable, value + "");
+            SetVariable(header, variable, value.ToString());
         }
 
         /// <summary>
