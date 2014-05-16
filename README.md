@@ -19,7 +19,7 @@ namespace INIConfigTest
             config.SetVariable("Header1", "somebool", false);
             config.SetVariable("user", "username", "bob");
             config.SetVariable("user", "password", "bobIsCool123");
-            console.WriteLine(config + ""); // Calls tostring which calls saveconfig.
+            console.WriteLine(config.ToString()); // Calls tostring which calls saveconfig.
         }
     }
 }
