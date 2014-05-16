@@ -168,7 +168,7 @@ namespace INIManager
                         }
                     }
                     
-                    variable[2] = variable[2].Replace("\r\n", "\n").Replace('\r', '\n')
+                    variable[2] = variable[2].Replace("\r\n", "\n").Replace('\r', '\n');
                     variable[2] = variable[2].Replace("\n", "\\" + eol);
 
                     config += eol + "[" + currentHeader + "]";
