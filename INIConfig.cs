@@ -88,9 +88,9 @@ namespace INIManager
             string[] configLines = config.Replace("\r", "").Split('\n');
 
             string currentHeader = "";
-            foreach (string l in configLines)
+            for (int linenr = 0; linenr < configLines.Length; linenr++)
             {
-                string line = l.Split(';')[0].Trim();
+                string line = configLines[linenr].Split(';')[0].Trim();
 
                 // Skip "empty" lines
                 if (line.Length == 0)
@@ -101,6 +101,16 @@ namespace INIManager
                     currentHeader = match.Groups[0].Value;
                 else
                 {
+                    //Multi line
+                    while (line[line.Length - 1] == '\\')
+                    {
+                        line = line.Remove(line.Length - 1) + eol;
+                        if (linenr + 1 == configLines.Length)
+                            break;
+
+                        linenr++;
+                        line += configLines[linenr].Split(';')[0].Trim();
+                    }
                     string[] kv = line.Split(new char[] { '=' }, 2);
 
                     if (kv.Length == 1 && line.Contains("="))
