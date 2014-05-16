@@ -180,10 +180,29 @@ namespace INIManager
         }
 
 
+        #region overrides/operators
         override public string ToString()
         {
             return SaveConfig();
         }
+
+        public static bool operator ==(INIConfig config1, INIConfig config2) {
+            return config1.SaveConfig() == config2.SaveConfig();
+        }
+
+        public static bool operator !=(INIConfig config1, INIConfig config2)
+        {
+            return config1.SaveConfig() != config2.SaveConfig();
+        }
+
+        override public bool Equals(object o)
+        {
+            if (o.GetType() == typeof(INIConfig) == this.GetType())
+                return (INIConfig)this == (INIConfig)o;
+            else
+                return false;
+        }
+        #endregion
 
         #region Getters
         /// <summary>
