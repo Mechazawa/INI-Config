@@ -2,6 +2,7 @@ INI-Config
 ==========
 
 An INI config reader/writer with excelent in-code documentation. 
+It supports basic INI stuff but it can also write comments when saving and read multi line strings!
 
 #Example
 
