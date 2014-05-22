@@ -197,7 +197,7 @@ namespace INIManager
 
         override public bool Equals(object o)
         {
-            if (o.GetType() == typeof(INIConfig) == this.GetType())
+            if (o.GetType() == typeof(INIConfig))
                 return (INIConfig)this == (INIConfig)o;
             else
                 return false;
