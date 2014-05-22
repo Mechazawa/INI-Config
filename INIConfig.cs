@@ -71,17 +71,8 @@ namespace INIManager
         /// Loads a configuration file
         /// </summary>
         /// <param name="config">Config data</param>
-        public void LoadConfig(string config)
-        {
-            LoadConfig(config, true);
-        }
-
-        /// <summary>
-        /// Loads a configuration file
-        /// </summary>
-        /// <param name="config">Config data</param>
-        /// <param name="overwriteOld">Overwrite the old data (default true)</param>
-        public void LoadConfig(string config, bool overwriteOld)
+        /// <param name="overwriteOld">Overwrite the old data</param>
+        public void LoadConfig(string config, bool overwriteOld=true)
         {
             if (overwriteOld)
                 configData.Clear();
